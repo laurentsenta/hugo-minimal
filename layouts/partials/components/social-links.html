@@ -1,0 +1,89 @@
+<div class="columns is-size-3 has-text-centered p-4">
+{{ with .twitter }}
+    <div class="column">
+        <a href="{{ . }}"
+           rel="nofollow"
+           target="_blank"
+           title="twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+    </div>
+{{ end }}
+
+{{ with .website }}
+    <div class="column">
+        <a href="{{ . }}"
+           rel="nofollow"
+           target="_blank"
+           title="website">
+            <i class="fad fa-seedling"></i>
+        </a>
+    </div>
+{{ end }}
+
+{{ with .github }}
+    <div class="column">
+        <a href="{{ . }}"
+           rel="nofollow"
+           target="_blank"
+           title="github">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+{{ end }}
+
+{{ with .blog }}
+    <div class="column">
+        <a href="{{ . }}"
+           rel="nofollow"
+           target="_blank"
+           title="blog">
+            <i class="far fa-rss"></i>
+        </a>
+    </div>
+{{ end }}
+
+{{ with .linkedin }}
+    <div class="column">
+        <a href="{{ . }}"
+           rel="nofollow"
+           target="_blank"
+           title="linkedin">
+            <i class="fab fa-linkedin"></i>
+        </a>
+    </div>
+{{ end }}
+
+{{ with .angellist }}
+    <div class="column">
+        <a href="{{ . }}"
+           rel="nofollow"
+           target="_blank"
+           title="angel">
+            <i class="fab fa-angellist"></i>
+        </a>
+    </div>
+{{ end }}
+
+{{ with .facebook }}
+    <div class="column">
+        <a href="{{ . }}"
+           rel="nofollow"
+           target="_blank"
+           title="facebook">
+            <i class="fab fa-facebook"></i>
+        </a>
+    </div>
+{{ end }}
+
+{{ with .instagram }}
+    <div class="column">
+        <a href="{{ . }}"
+           rel="nofollow"
+           target="_blank"
+           title="instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+{{ end }}
+</div>

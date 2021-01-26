@@ -1,0 +1,26 @@
+{{ with .content }}
+<div {{ with .id }}id="{{ . }}"{{ end }} class="action-card">
+    <div class="">
+        <div class="body">
+        {{ with .title }}
+            <h2 id="cta">
+            {{ . }}
+            </h2>
+        {{ end }}
+
+        {{ with .body }}
+            <p>
+            {{ . }}
+            </p>
+        {{ end }}
+
+        {{ with .action }}
+            <a
+            {{ with .target }}target="{{ . }}"{{ end }}
+            href="{{ if .url }}{{ .url }}{{ else }}{{ relref $.Page .ref }}{{ end }}">
+            {{ .name | markdownify }}</a>
+        {{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}

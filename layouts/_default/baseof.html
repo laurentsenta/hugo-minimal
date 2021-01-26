@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="{{ if .Params.LanguageCode }}{{ .Params.LanguageCode }}{{ else }}{{ $.Site.LanguageCode }}{{ end }}">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:url" content="{{ .Permalink }}"/>
+
+    {{ with $.Site.Params.favicon }}
+        <link rel="icon" href="{{ . }}">
+    {{ end }}
+
+    {{ with .Params.SEODescription | default .Params.Description | default $.Site.Params.SEODescription }}
+        <meta name="description" content="{{ . }}">
+        <meta property="og:description" content="{{ . }}"/>
+        <meta name="twitter:description" content="{{ . }}"/>
+    {{ end }}
+
+    {{ with .Params.SEOKeywords | default $.Site.Params.SEOKeywords }}
+        <meta name="keywords" content="{{ range $i, $e := . }}{{- if $i }},{{ end }}{{ $e }}{{ end }}">
+    {{ end }}
+
+    {{ with .Params.SEOTitle | default .Params.Title | default $.Site.Params.SEOTitle | default $.Site.Title }}
+        <meta property="og:title" content="{{ . }}"/>
+        <meta name="twitter:title" content="{{ . }}"/>
+    {{ end }}
+
+    {{ if eq .Kind "page" }}
+        <meta property="og:type" content="article"/>
+        <meta name="twitter:card" content="summary"/>
+    {{ end }}
+
+    {{ with $.Site.Author.twitter }}
+        <meta name="twitter:site" content="@{{ . }}"/>
+    {{ end }}
+
+    {{ with .Params.cover | default $.Site.Params.cover }}
+        <meta property="og:image" content="{{ $.Site.BaseURL }}{{ . }}"/>
+        <meta name="twitter:image" content="{{ $.Site.BaseURL }}{{ . }}"/>
+    {{ end }}
+
+    {{ if .IsTranslated }}
+        {{ range .Translations }}
+            <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+        {{ end }}
+    {{ end }}
+
+    {{ with .Params.redirect }}
+        <meta http-equiv="refresh" content="0; url={{ . }}"/>
+    {{ end }}
+
+    <!-- Page Title -->
+    <title>
+        {{- block "title" . -}}
+        {{ with .Params.SEOTitle | default .Params.Title | default $.Site.Params.SEOTitle | default $.Site.Title }}
+        {{ . }}
+        {{ end }}
+        {{- end -}}
+    </title>
+
+    <!-- HugoBlocks -->
+    {{ $options := $.Site.Params.sass }}
+    {{ $style := resources.Get $.Site.Params.sass.source | resources.ToCSS $options }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}">
+
+    {{ $options := $.Site.Params.js.head }}
+    {{ $js := resources.Get $options.source | js.Build $options }}
+    <script type="text/javascript" src="{{ $js.Permalink }}" defer></script>
+</head>
+<body>
+{{ block "header" . }}
+    {{ partial "components/header.html" . }}
+{{ end }}
+
+{{ if .Params.redirect }}
+<div>
+    <h2>
+        Redirecting to the latest version...
+        Please click <a href="{{ .Params.redirect }}">here</a> if nothing happens.
+    </h2>
+</div>
+{{ else }}
+    {{ block "main" . }}
+    {{ end }}
+{{ end }}
+
+{{ block "footer" . }}
+    {{ partial "components/footer.html" . }}
+{{ end }}
+
+{{ $options := $.Site.Params.js.footer }}
+{{ $js := resources.Get $options.source | js.Build $options }}
+<script type="text/javascript" src="{{ $js.Permalink }}" defer></script>
+
+{{ with $.Site.Params.analytics.simpleanalytics_domain }}
+    <script async defer src="https://{{ . }}/latest.js"></script>
+    <noscript><img src="https://{{ . }}/noscript.gif" alt=""/></noscript>
+{{ end }}
+
+{{ with $.Site.Params.analytics.tawkto_src }}
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='{{ . }}';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+{{ end }}
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-9ZfPnbegQSumzaE7mks2IYgHoayLtuto3AS6ieArECeaR8nCfliJVuLh/GaQ1gyM" crossorigin="anonymous">
+</body>
+</html>

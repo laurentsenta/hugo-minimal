@@ -1,0 +1,15 @@
+<section class="hero is-medium is-primary is-bold is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container">
+        {{ with .headline }}
+            {{ partial "atoms/heading" . }}
+        {{ end }}
+        {{ with .subheader }}
+            {{ partial "atoms/subheading" . }}
+        {{ end }}
+        {{ with .callToAction }}
+            {{ partial "atoms/cta" . }}
+        {{ end }}
+        </div>
+    </div>
+</section>

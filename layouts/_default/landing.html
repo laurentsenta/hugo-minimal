@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="p-4">
+    {{ partial "blocks" . }}
+
+    {{ if .Params.showHero }}    
+        {{ partial "blocks/hero.html" (dict "content" (dict "title" .Title "tagline" .Params.description))}}
+    {{ end }}
+
+    <div class="container is-max-desktop">
+        {{ .Content }}
+
+        {{ partial "subscribe.html" . }}
+    </div>
+</div>
+{{ end }}

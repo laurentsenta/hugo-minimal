@@ -1,0 +1,33 @@
+<!--
+default: content, string
+content: string
+iconLeft: fas fa-bold
+iconRight: fas fa-bold
+-->
+{{ if eq (printf "%T" .) "string" }}
+    <a class="button is-primary is-medium is-rounded">
+        <span>{{ . }}</span>
+        <span class="icon is-medium">
+            <i class="fas fa-arrow-right"></i>
+        </span>
+    </a>
+{{ else }}
+    {{ $class := "is-primary" }}
+    {{ if (.isSecondary | default false) }}
+      {{ $class = "is-secondary is-outlined" }}
+    {{ end }}
+
+    <a class="button {{ $class }} is-medium is-rounded">
+        {{ with .iconLeft }}
+        <span class="icon is-medium">
+            <i class="{{ . }}"></i>
+        </span>
+        {{ end }}
+        <span>{{ .content }}</span>
+        {{ with .iconRight }}
+        <span class="icon is-medium">
+            <i class="{{ . }}"></i>
+        </span>
+        {{ end }}
+    </a>
+{{ end }}

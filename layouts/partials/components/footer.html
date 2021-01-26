@@ -1,0 +1,35 @@
+<footer class="footer">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+          {{ template "menu" (dict "menu" $.Site.Menus.company "title" "Company") }}
+      </div>
+      <div class="column">
+        {{ template "menu" (dict "menu" $.Site.Menus.things "title" "Things") }}
+      </div>
+      <div class="column has-text-centered">
+        {{ with .Site.Params.logo_invert }}
+            <img src="{{ . }}" width="180px" alt="SingularGarden"/>
+        {{ end }}
+        {{ with .Site.Author }}
+            {{ partial "components/social-links" . }}
+        {{ end }}
+      </div>
+    </div>
+    <hr />
+  </div>
+  {{ with $.Site.Params.copyrigth }}
+      <p class="has-text-centered">{{ . | markdownify }}</p>
+  {{ end }}
+</footer>
+
+{{ define "menu" }}
+    <h3 class="is-size-4">{{ .title }}</h3>
+    {{ range .menu  }}
+    <p class="my-2 is-size-6">
+        <a href="{{ .URL }}" {{ if .Params.external }}target="_blank"{{ end }}>
+            {{ .Name }}
+        </a>
+    </p>
+    {{ end }}
+{{ end }}  

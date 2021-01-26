@@ -1,0 +1,31 @@
+{{ define "main" }}
+<div class="p-4">
+    {{ partial "blocks" . }}
+
+    {{ with .Params.cover }}
+        <div class="cover"
+            style="background-image: url('{{ . | absURL }}');"
+        ></div>
+    {{ end }}
+
+    {{ partial "blocks/hero.html" (dict "content" (dict "title" .Title "tagline" .Params.description))}}
+
+    <section class="container is-max-desktop">
+        {{ partial "categories" . }}
+
+        <div class="content is-medium">
+            {{ .Content }}
+        </div>
+
+        {{ if not ($.Param "as_single") }}
+        {{ partial "posts/list" . }}
+        {{ end }}
+        
+        {{ partial "subscribe.html" . }}
+
+        <div class="comments">
+            {{ template "_internal/disqus.html" . }}
+        </div>
+    </section>
+</div>
+{{ end }}

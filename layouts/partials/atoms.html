@@ -1,0 +1,4 @@
+{{ range .Params.atoms }}
+    {{ $atom := (printf "%s%s" "atoms/" .kind ) }}
+    {{ partial $atom . }}
+{{ end }}

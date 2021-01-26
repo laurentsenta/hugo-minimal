@@ -1,0 +1,36 @@
+<!--
+default: content, string
+content: string
+level: h#level
+-->
+{{ if eq (printf "%T" .) "string" }}
+    <h1 class="title">
+        {{ . }}
+    </h1>
+{{ else }}
+    {{ if (eq (.level | default 1) 1 ) }}
+        <h1 class="title">
+            {{ .content }}
+        </h1>
+    {{ else if (eq .level 2 ) }}
+        <h2 class="title">
+            {{ .content }}
+        </h2>
+    {{ else if (eq .level 3 ) }}
+        <h3 class="title">
+            {{ .content }}
+        </h3>
+    {{ else if (eq .level 4 ) }}
+        <h4 class="title">
+            {{ .content }}
+        </h4>
+    {{ else if (eq .level 5 ) }}
+        <h5 class="title">
+            {{ .content }}
+        </h5>
+    {{ else if (eq .level 6 ) }}
+        <h6 class="title">
+            {{ .content }}
+        </h6>
+    {{ end }}
+{{ end }}

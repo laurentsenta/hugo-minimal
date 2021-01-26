@@ -1,0 +1,25 @@
+<!--
+{{ with .NextInSection }}
+<li class="page-item">
+    <a class="page-link" href="{{ .Permalink }}">
+        {{ .Title }}
+    </a>
+</li>
+{{ end }}
+
+{{ with .PrevInSection }}
+<li class="page-item">
+    <a class="page-link" href="{{ .Permalink }}">
+        {{ .Title }}
+    </a>
+</li>
+{{ end }}
+-->
+
+{{ with .CurrentSection }}
+<h3 class="has-text-centered is-size-5">
+    <a class="page-link" href="{{ .Permalink }}">
+        Check my other articles in {{ .Title }}
+    </a>
+</h3>
+{{ end }}

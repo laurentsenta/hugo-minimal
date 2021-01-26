@@ -1,0 +1,110 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+    {{ with $.Site }}
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{ "/" | relLangURL }}">
+            {{ if .Params.Navbar.Image }}
+                {{- $image := resources.Get .Params.Navbar.Image -}}
+                {{- $image := $image.Fit "400x250" -}}
+                <img src="{{ $image.Permalink }}" alt="{{ .Params.Navbar.Title | default .Title }}">
+            {{ else }}
+                {{ .Params.Navbar.Title | default .Title }}
+            {{ end }}
+        </a>
+    
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        </a>
+    </div>
+    {{ end }}
+    
+    {{ $currentPage := . }}
+
+    <div id="navbarMain" class="navbar-menu">
+      <div class="navbar-start">
+        {{ range .Site.Menus.main }}
+            {{ template "navbarItem" (dict "currentPage" $currentPage "item" .) }}
+        {{ end }}
+      </div>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+            {{ partial "components/i18n-switch" . }}
+        </div>
+        {{ range .Site.Menus.mainalt }}
+            {{ template "navbarItem" (dict "currentPage" $currentPage "item" .) }}
+        {{ end }}
+      </div>
+    </div>
+    </div>
+  </nav>
+
+{{ define "navbarItem" }}
+    {{ if .Page }}
+    {{ end }}
+
+    {{ $currentPage := .currentPage }}
+    {{ $className := "navbar-item" }}
+
+    {{ if .currentPage.IsMenuCurrent "main" .item }}
+        {{ $className = (printf "%s%s" $className " active" ) }}
+    {{ end }}
+
+    {{ with .item }}
+        {{ if .HasChildren }}
+            {{ $className = (printf "%s%s" $className " has-dropdown is-hoverable" ) }}
+
+            <div class="{{ $className }}">
+                {{ if .URL }}
+                    <a  class="navbar-link"
+                        {{ if .Pre }}target="{{ .Pre }}"{{ end }}
+                    >
+                        {{ with .Params.icon }}
+                            <i class="{{ . }} mr-1"></i>
+                        {{ end }}
+                        {{ .Name }}
+                    </a>
+                {{ else }}
+                    <a  class="navbar-item"
+                        {{ if .Pre }}target="{{ .Pre }}"{{ end }}
+                        >
+                        {{ with .Params.icon }}
+                            <i class="{{ . }} mr-1"></i>
+                        {{ end }}
+                        {{ .Name }}
+                </a>
+                {{ end }}
+        
+                <div class="navbar-dropdown is-boxed">
+                {{ range .Children }}
+                    {{ template "navbarItem" (dict "currentPage" $currentPage "item" .) }}
+                {{ end }}
+                </div>
+            </div>
+        {{ else }}
+            {{ if .Params.isPrimary }}
+                <div  class="{{ $className }}">
+                    <a class="button is-primary"
+                        {{ if .Pre }}target="{{ .Pre }}"{{ end }}
+                        href="{{ .URL | relLangURL }}">
+                        {{ with .Params.icon }}
+                            <i class="{{ . }} mr-1"></i>
+                        {{ end }}
+                        {{ .Name }}
+                    </a>
+                </div>
+            {{ else }}
+                <a  class="{{ $className }}"
+                    {{ if .Pre }}target="{{ .Pre }}"{{ end }}
+                    href="{{ .URL | relLangURL }}">
+                    {{ with .Params.icon }}
+                        <i class="{{ . }} mr-1"></i>
+                    {{ end }}
+                    {{ .Name }}
+                </a>
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}

@@ -1,0 +1,9 @@
+<div class="action-social">
+{{ with .content.title }}
+    <h3>{{ . }}</h3>
+{{ end }}
+
+{{ with .Site.Params.Author }}
+    {{ partial "components/social-links" . }}
+{{ end }}
+</div>

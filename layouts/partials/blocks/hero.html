@@ -1,0 +1,69 @@
+{{ with .content }}
+<section class="hero {{ if .fullheight }}is-fullheight-with-navbar{{ else }}is-medium{{ end }}">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-vcentered is-centered">
+                {{ if .image }}
+                <div class="column">
+                    <img src="{{ .image }}"/>
+                </div>
+                {{ end }}
+                {{ if .embed }}
+                <div class="column">
+                    {{ partial "embed-timer" . }}
+                </div>
+                {{ end }}
+
+                <div class="column has-text-centered is-half">
+                    <h1 class="title is-1">
+                        {{ .title | markdownify }}
+                    </h1>
+
+                    {{ with .tagline }}
+                        <h2 class="subtitle is-5">
+                            {{ . | markdownify }}
+                        </h2>
+                    {{ end }}
+                </div>
+            </div>
+
+            {{ with .actions }}
+            <div class="columns">
+                {{ with .left }}
+                    <div class="column has-text-right has-text-centered-mobile">
+                        <a class="button is-medium {{ .class | default "" }}" 
+                           href="{{ .url }}"
+                           {{ with .target }}target="{{ . }}"{{ end }}
+                           role="button"
+                           data-scroll>
+                            {{ with .icon }}
+                            <span class="icon">
+                                <i class="{{ . }}"></i>
+                            </span>
+                            {{ end }}
+                            <span>
+                                {{ .name | markdownify }}
+                            </span>
+                        </a>
+                    </div>
+                {{ end }}
+                {{ with .right }}
+                    <div class="column has-text-left has-text-centered-mobile">
+                        <a class="button is-medium {{ .class | default "" }}" href="{{ .url }}" role="button" data-scroll>
+                            {{ with .icon }}
+                            <span class="icon">
+                                <i class="{{ . }}"></i>
+                            </span>
+                            {{ end }}
+                            <span>
+                                {{ .name | markdownify }}
+                            </span>
+                        </a>
+                    </div>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}

@@ -1,0 +1,37 @@
+{{ define "main" }}
+<section class="hero is-white is-medium">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            {{- $image := resources.Get "/brand/hero-pic.png" -}}
+            {{- $image := $image.Fit "1024x237" -}}
+            <img src="{{ $image.Permalink }}" alt="SingularGarden" style="max-height: 119px;"/>
+            <h1 class="title">
+                {{ .Params.heading }}
+            </h1>
+            <h2 class="subtitle">
+                {{ .Params.subheading }}
+            </h2>
+        </div>
+    </div>
+</section>
+
+{{ with $.Site.Menus.home }}
+    <section class="container is-max-widescreen p-4">
+        <div class="columns is-vcentered is-multiline is-centered">
+            {{ range . }}
+                <div class="column is-one-third">
+                    {{ partial "components/HomeCard" . }}
+                </div>
+            {{ end }}
+        </div>
+    </section>
+{{ end }}
+
+<div class="p-4">
+    <div class="container is-max-desktop">
+        {{ .Content }}
+
+        {{ partial "subscribe.html" . }}
+    </div>
+</div>
+{{ end }}

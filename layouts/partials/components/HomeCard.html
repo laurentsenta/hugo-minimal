@@ -1,0 +1,18 @@
+<div class="card full-height">
+  <div class="card-image">
+    <a href="{{ .Page.RelPermalink }}">
+      <figure class="image is-4by3">
+        <img
+          src="{{ .Page.Params.card | default "https://bulma.io/images/placeholders/1280x960.png" }}"
+          alt="image for {{ .Title }}"
+        />
+      </figure>
+    </a>
+  </div>
+  <div class="card-content">
+    <a href="{{ .Page.RelPermalink }}">
+      <h3 class="title is-3 balance-text">{{ .Title }}</h3>
+      <p class="subtitle has-text-grey">{{ .Page.Description }}</p>
+    </a>
+  </div>
+</div>

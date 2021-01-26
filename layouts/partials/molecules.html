@@ -1,0 +1,4 @@
+{{ range .Params.molecules }}
+    {{ $molecule := (printf "%s%s" "molecules/" .kind ) }}
+    {{ partial $molecule . }}
+{{ end }}

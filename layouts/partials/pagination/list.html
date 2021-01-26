@@ -1,0 +1,27 @@
+<nav class="pagination my-3" role="navigation" aria-label="pagination">
+    {{ if .Paginator.HasNext }}
+    <a class="pagination-previous" href="{{ .Paginator.Next.URL }}">Previous</a>
+    {{ else }}
+    <a class="pagination-previous" title="This is the first page" disabled>Previous</a>
+    {{ end }}
+
+    {{ if .Paginator.HasPrev }}
+    <a class="pagination-next" href="{{ .Paginator.Prev.URL }}">Next</a>
+    {{ else }}
+    <a class="pagination-next" title="This is the last page" disabled>Next</a>
+    {{ end }}
+
+    <!--
+        <ul class="pagination-list">
+            <li>
+                <a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
+            </li>
+            <li>
+                <a class="pagination-link" aria-label="Goto page 2">2</a>
+            </li>
+            <li>
+                <a class="pagination-link" aria-label="Goto page 3">3</a>
+            </li>
+        </ul>
+    -->
+</nav>
