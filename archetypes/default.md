@@ -20,6 +20,15 @@ params:
         simpleanalytics_domain:
         tawkto_src:
     mailinglist:
+    navbar:
+        image:
+        title:
+menus:
+    main:
+    mainalt:
+        - isPrimary:
+          URL:
+          icon:
 
 ## Pages available
 
